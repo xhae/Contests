@@ -1,2 +1,2 @@
 # Contests
-Programming contest solutions of xhae
+Programming contest solutions by xhae
