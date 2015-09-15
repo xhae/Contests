@@ -6,35 +6,8 @@ using namespace std;
 
 long long dp[2][201][201];
 int n;
-
 vector<pair<long long, long long>> data[2];
-
 const long long INF = (1ll << 60);
-
-long long getAns(int type, int ai, int bi) {
-	long long &ret = dp[type][ai][bi];
-	if(ret != -1) return ret;
-
-	if(ai == 0 and bi == 0) ret = 0;
-	else if(ai == 0) {
-		if(type == 0) ret = INF;
-		else {
-			ret = data[1][0].first + data[1][0].second;
-			for(int i = 1; i < bi; i++) {
-				:		
-			}
-		}
-	} else if(bi == 0) {
-		if(type == 1) ret = INF;
-		else {
-
-		}
-	} else {
-
-	}
-
-	return ret;
-}
 
 int main(void) {
 	int T;
@@ -50,8 +23,31 @@ int main(void) {
 			else data[1].push_back(make_pair(s, t));
 		}
 
-		memset(dp, -1, sizeof(dp));
-		printf("%lld\n", min(getAns(0, data[0].size(), data[1].size()), getAns(1, data[0].size(), data[1].size()));
+		for(int i = 0; i <= data[0].size(); i++)
+			for(int j = 0; j <= data[1].size(); j++)
+				dp[0][i][j] = dp[1][i][j] = INF;
+
+		dp[0][0][0] = dp[1][0][0] = 0;
+		for(int i = 0; i <= data[0].size(); i++)
+			for(int j = 0; j <= data[1].size(); j++) {
+				long long start = dp[0][i][j], ed = 0;
+				for(int k = i; k < data[0].size(); k++) {
+					start = max(start, data[0][k].first);
+					ed = max(ed, start + data[0][k].second);
+					dp[1][k + 1][j] = min(dp[1][k + 1][j], ed);
+					start += 10, ed += 10;
+				}
+			
+				start = dp[1][i][j], ed = 0;
+				for(int k = j; k < data[1].size(); k++) {
+					start = max(start, data[1][k].first);
+					ed = max(ed, start + data[1][k].second);
+					dp[0][i][k + 1] = min(dp[0][i][k + 1], ed);
+					start += 10, ed += 10;
+				}
+			}
+		
+		printf("%lld\n", min(dp[0][data[0].size()][data[1].size()], dp[1][data[0].size()][data[1].size()]));
 	}
 
 	return 0;
