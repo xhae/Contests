@@ -1,6 +1,4 @@
-#include <sstream>
-#include <string>
-#include <iostream>
+#include <cstdio>
 
 using namespace std;
 
@@ -13,14 +11,12 @@ int main(void) {
 		scanf("%d", &n);
 		bool over = false;
 		int cnt[2] = {0, 0};
-		bool isZero = false;
 		while(n--) {
 			long long v;
 			scanf("%lld", &v);
 			cur *= v;
 			if(cur >= 10000) over = true;
 
-			if(v == 0) isZero = true;
 			while(v > 0 and v % 2 == 0) {
 				v /= 2;
 				cnt[0]++;
