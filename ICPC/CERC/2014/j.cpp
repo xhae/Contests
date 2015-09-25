@@ -35,7 +35,7 @@ int getAns(int s, int e) {
 		int si = lower_bound(coords.begin(), coords.end(), aliens[find].start) - coords.begin();
 		int ei = lower_bound(coords.begin(), coords.end(), aliens[find].end) - coords.begin();
 		ret = 1 << 30;
-		for(int ind = si; ind <= ei; ind++) ret = min(ret, farthest + getAns(s, ind - 1) + getAns(ind + 1, e));
+		for(int ind = si; ind <= ei; ind++) ret = min(ret, farthest + getAns(s, ind - 1) + getAns(ind + 1, e)); // why from si + 1 WA?
 	}
 
 	return ret;
