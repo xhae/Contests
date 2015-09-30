@@ -15,10 +15,10 @@ long long getPow(long long base, long long exp) {
 }
 
 int main(void) {
-	fact[0] = 1;
+	fact[0] = invfact[0] = 1;
 	for(int i = 1; i <= 50; i++) {
 		fact[i] = fact[i - 1] * i % MOD;
-		infvact[i] = getPow(fact[i], MOD - 2);
+		invfact[i] = getPow(fact[i], MOD - 2);
 	}
 
 	return 0;
