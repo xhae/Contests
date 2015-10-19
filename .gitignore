@@ -2,3 +2,5 @@
 *.swp
 *.txt
 .DS_Store
+*.exe
+*~
